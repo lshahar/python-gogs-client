@@ -271,6 +271,13 @@ class GogsApi(object):
             "private": private,
             "description": description,
         }
+        try: 
+            if ((auth_username is not None) and (auth_password is not None)): 
+                data['auth_username'] = auth_username
+                data['auth_password'] = auth_password
+        except Exception as e:
+            print ("No user Found")
+            
         data = {k: v for (k, v) in data.items() if v is not None}
         url = "/repos/migrate"
         response = self.post(url, auth=auth, data=data)
